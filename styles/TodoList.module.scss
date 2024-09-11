@@ -1,15 +1,46 @@
+.counter {
+  width: 60%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  margin-top: 100px;
+
+  h1 {
+    margin-bottom: 10px;
+  }
+
+  input {
+    padding: 8px;
+  }
+
+  button {
+    padding: 8px;
+  }
+}
+
 .todoList {
   list-style: none;
   padding: 0;
+  width: 60%;
+  margin: 0 auto;
 
   li {
+    color: #000000;
     background-color: #f8f9fa;
     margin-bottom: 10px;
     padding: 10px;
     border-radius: 5px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+
+    .todoContent {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .todoButtons {
+      display: flex;
+      gap: 10px; /* 버튼 간 간격 추가 */
+      justify-content: flex-end; /* 버튼을 오른쪽으로 정렬 */
+    }
 
     &.completed {
       text-decoration: line-through;
@@ -27,6 +58,49 @@
       &:hover {
         background-color: #c82333;
       }
+    }
+  }
+}
+
+.detailsContainer {
+  width: 100%;
+  margin: 0 auto;
+  background-color: #f1f1f1;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.detailItem {
+  color: #333;
+  padding: 5px 0;
+}
+
+.inputContainer {
+  width: 20%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+
+  input {
+    flex-grow: 1;
+    padding: 8px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  button {
+    padding: 8px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #0056b3;
     }
   }
 }
