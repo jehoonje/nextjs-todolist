@@ -20,18 +20,6 @@ export default function Home() {
     }
   }, [todos]);
 
-  const handleAddTodo = () => {
-    if (newTask.trim() === "") return;
-    const newTodo = {
-      id: Date.now(),
-      task: newTask,
-      completed: false,
-      details: [], // 상세 정보 초기화
-    };
-    setTodos((prevTodos) => [...prevTodos, newTodo]);
-    setNewTask('');
-  };
-
   const handleDelete = (id) => {
     const updatedTodos = todos.filter((todo) => todo.id !== id);
     setTodos(updatedTodos);
@@ -47,15 +35,47 @@ export default function Home() {
     setTodos(updatedTodos);
   };
 
+  const handleEditTodo = (id, updatedTask) => {
+    const updatedTodos = todos.map((todo) =>
+      todo.id === id ? { ...todo, task: updatedTask } : todo
+    );
+    setTodos(updatedTodos);
+  };
+
+  const handleAddTodo = () => {
+    if (newTask.trim() === "") {
+      alert("Please enter a valid task");
+      return;
+    }
+    const newTodo = {
+      id: Date.now(),
+      task: newTask,
+      completed: false,
+      details: [],
+    };
+    setTodos((prevTodos) => [...prevTodos, newTodo]);
+    setNewTask('');
+  };
+
+  const handleReload = () => {
+    window.location.reload(); // 새로고침
+  };
+
   return (
     <>
-      <div className={styles.counter}>
+      <div onClick={handleReload} className={styles.counter}>
         <h1>DREAM BIG, START SMALL, ACT NOW.</h1>
         <input
           type="text"
           value={newTask}
           onChange={(e) => setNewTask(e.target.value)}
           placeholder="Enter a new task"
+          onKeyPress={(e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault(); // 기본 동작 방지
+              handleAddTodo();
+            }
+          }}
         />
         <button onClick={handleAddTodo}>Add Todo</button>
       </div>
@@ -63,6 +83,7 @@ export default function Home() {
         todos={todos}
         handleDelete={handleDelete}
         handleAddDetail={handleAddDetail}
+        handleEditTodo={handleEditTodo}
       />
     </>
   );
